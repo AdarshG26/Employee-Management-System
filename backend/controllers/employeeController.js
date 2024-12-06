@@ -111,6 +111,37 @@ const updateEmployeeById = async(req, res)=> {
     }
 }
 
+// const updateEmployeeById = async (req, res) => {
+//     try {
+//         const { id } = req.params
+//         const { name, email, phone, department, salary } = req.body
+//         let updateData = {
+//             name, email, phone, department, salary, updatedAt: new Date()
+//         }
+//         console.log('<----update---->', req.file);
+//         if(req.file){
+//             updateData.profileImage = req.file.path
+//         }
+
+//         const updatedEmployee = await Employee.findByIdAndUpdate(
+//             id,
+//             updateData,
+//             { new: true}
+//         )    
+//         if(!updatedEmployee){
+//             return res.send(404).json({ message: 'Employee not found' })
+//         }
+//         res.status(200).json({
+//             message: 'Employee updated successfully',
+//             succes: true,
+//             data: updatedEmployee
+//         })
+//     } catch (err) {
+//         console.log(err);
+//         res.status(500).json({message: err.message})
+//     }
+// }
+
 const deleteById = async(req, res)=> {
     try {
         const empId = req.params.id;
