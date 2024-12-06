@@ -1,14 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const EmployeeTable = ({employees, pagination, fetchEmployees, handleUpdateEmployee}) => {
+const EmployeeTable = ({employees, pagination, fetchEmployees, handleUpdateEmployee, handleDeleteEmployee}) => {
     const headers = ['Name', 'Email', 'Phone', 'Department', 'Actions'];
     const {currentPage, totalPages} = pagination;
 
     const TableRow = ({ employee })=> {
         return <tr>
             <td>
-                <Link to={`/employee/`} className = 'text-decoration-none' /> {employee.name} <Link/>
+                <Link to={`/employee/${employee._id}`} className = 'text-decoration-none' /> {employee.name} <Link/>
             </td>
             <td>{employee.email}</td>
             <td>{employee.phone}</td>
@@ -24,11 +24,11 @@ const EmployeeTable = ({employees, pagination, fetchEmployees, handleUpdateEmplo
                     
                 </i>
                 <i 
-                    className='bi bi-trash-fill text-danger md-4'
+                    className='bi bi-trash-fill text-danger md-4 px-3'
                     role='button'
                     data-bs-toggle='tooltip'
                     data-bs-placement='top'
-                    onClick={()=>{ }}
+                    onClick={()=> handleDeleteEmployee(employee)}
                 >
                     
                 </i>
@@ -53,6 +53,8 @@ const handlePreviousPage = ()=> {
         handlePagination(currentPage - 1)
     }
 }
+
+
 
   return (
     <>
@@ -111,5 +113,6 @@ const handlePreviousPage = ()=> {
     </>
   )
 }
+
 
 export default EmployeeTable

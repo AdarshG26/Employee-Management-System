@@ -63,3 +63,18 @@ export const updateEmployeeById = async (empObj, id) => {
         return err;
     }
 }
+
+export const deleteEmployeeById = async (id) => {
+    const url = `${BASE_URL}/employee/${id}`;
+    
+    const options = {
+        method: 'Delete',
+    }
+    try {
+        const result = await fetch(url, options);
+        const data = await result.json(); 
+        return data;
+    } catch (err) {
+        return err;
+    }
+}

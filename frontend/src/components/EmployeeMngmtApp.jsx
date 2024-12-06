@@ -3,6 +3,8 @@ import EmployeeTable from './EmployeeTable'
 import { getAllEmployees } from '../api'
 import AddEmployee from './AddEmployee'
 import { ToastContainer } from 'react-toastify'
+import { notify } from '../utils'
+import { deleteEmployeeById } from '../api'
 
 const EmployeeMngmtApp = () => {
 
@@ -43,6 +45,20 @@ const EmployeeMngmtApp = () => {
         setShowModal(true);
     }
 
+    const handleDeleteEmployee = async(emp)=> {
+        try {
+            const { success, message } = await deleteEmployeeById(emp._id)
+            if(success){
+                notify(message, 'success')
+            }else{
+                notify(message, 'error')
+            }
+        } catch (err) {
+            console.log('Error', err);
+            notify(err, 'error');
+        }
+    }
+
   return (
     <div className='d-flex flex-column justify-content-center align-items-center w-100 p-3'>
         <h1>Employee Management App</h1>
@@ -66,6 +82,7 @@ const EmployeeMngmtApp = () => {
                     employees = {employeeData.employees}
                     pagination = {employeeData.pagination}
                     handleUpdateEmployee= {handleUpdateEmployee}
+                    handleDeleteEmployee = {handleDeleteEmployee}
                 />
 
                 <AddEmployee 
